@@ -24,7 +24,7 @@ export function SkillDetailPage({ state, dispatch }: SkillDetailPageProps) {
         <section className="card">
           <h1>Skill not found</h1>
           <p>The selected skill does not exist anymore.</p>
-          <Link to="/" className="inline-link">
+          <Link to="/app" className="inline-link">
             Back to dashboard
           </Link>
         </section>
@@ -50,9 +50,14 @@ export function SkillDetailPage({ state, dispatch }: SkillDetailPageProps) {
   return (
     <main className="shell">
       <section className="card detail-header">
-        <Link to="/" className="inline-link">
-          &lt;- Back
-        </Link>
+        <div className="detail-nav">
+          <Link to="/app" className="inline-link">
+            &lt;- Back to App
+          </Link>
+          <Link to="/" className="app-back-link">
+            Back to Motivation
+          </Link>
+        </div>
         <p className="eyebrow">Skill Detail</p>
         <input
           className="title-input"

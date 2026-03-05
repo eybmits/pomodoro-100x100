@@ -42,6 +42,12 @@ export function DashboardPage({ state, dispatch }: DashboardPageProps) {
 
   return (
     <main className="shell">
+      <div className="app-meta-nav">
+        <Link to="/" className="app-back-link">
+          Back to Motivation
+        </Link>
+      </div>
+
       <section className="hero card">
         <p className="eyebrow">100x100 Pomodoro</p>
         <h1>Build competence through focused repetition.</h1>
@@ -159,7 +165,7 @@ export function DashboardPage({ state, dispatch }: DashboardPageProps) {
             return (
               <article key={skill.id} className="skill-card">
                 <header>
-                  <Link to={`/skill/${skill.id}`}>{skill.title}</Link>
+                  <Link to={`/app/skill/${skill.id}`}>{skill.title}</Link>
                   {isActive && <span className="active-pill">Active</span>}
                 </header>
 

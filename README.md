@@ -6,6 +6,8 @@ A public, local-first web app for the **100x100 principle**:
 - Build practical competence through consistent, focused repetition.
 
 ## MVP Features
+- Motivational landing page at `/#/` with premium launch-style motion, primary CTA, and a skip link to the app.
+- App workspace starts at `/#/app`.
 - Dashboard with global progress (up to 10,000 sessions total).
 - Skill tracker with manual `+/-` correction per skill.
 - Built-in Pomodoro timer (25:00 focus / 5:00 break).
@@ -40,6 +42,11 @@ npm run preview
 
 Expected URL pattern:
 `https://<your-user>.github.io/<repo-name>/#/`
+
+Important routes:
+- Landing: `/#/`
+- App dashboard: `/#/app`
+- Skill details: `/#/app/skill/<skill-id>`
 
 ## License
 MIT (see `LICENSE`).
