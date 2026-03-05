@@ -18,28 +18,12 @@ describe("App integration", () => {
       </HashRouter>
     );
 
-    expect(screen.getByText("Master 100 Skills with 100 Focus Sessions Each.")).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "Skip to App" })).toBeInTheDocument();
+    expect(screen.getByText("A simple way to track deep practice.")).toBeInTheDocument();
 
-    fireEvent.click(screen.getByRole("link", { name: "Enter the 100x100 Studio" }));
+    fireEvent.click(screen.getByRole("link", { name: "Open the App" }));
 
     expect(screen.getByText("Pomodoro Timer")).toBeInTheDocument();
     expect(window.location.hash).toBe("#/app");
-  });
-
-  it("opens the app via skip link", () => {
-    window.location.hash = "#/";
-
-    render(
-      <HashRouter>
-        <App />
-      </HashRouter>
-    );
-
-    fireEvent.click(screen.getByRole("link", { name: "Skip to App" }));
-
-    expect(window.location.hash).toBe("#/app");
-    expect(screen.getByText("Pomodoro Timer")).toBeInTheDocument();
   });
 
   it("counts a session when a focus timer reaches zero", async () => {

@@ -6,7 +6,7 @@ A public, local-first web app for the **100x100 principle**:
 - Build practical competence through consistent, focused repetition.
 
 ## MVP Features
-- Motivational landing page at `/#/` with premium launch-style motion, primary CTA, and a skip link to the app.
+- Motivational landing page at `/#/` with launch-style motion and a direct CTA into the app.
 - App workspace starts at `/#/app`.
 - Dashboard with global progress (up to 10,000 sessions total).
 - Skill tracker with manual `+/-` correction per skill.

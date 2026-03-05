@@ -1,26 +1,5 @@
 import { Link } from "react-router-dom";
 
-const valueCards = [
-  {
-    step: "01",
-    title: "Commitment Becomes Compounding",
-    description:
-      "Turn raw curiosity into measurable capability by stacking disciplined focus blocks daily."
-  },
-  {
-    step: "02",
-    title: "Launch Discipline Like a Product",
-    description:
-      "Treat every session like a release cycle: clear scope, visible output, immediate feedback."
-  },
-  {
-    step: "03",
-    title: "Proof Over Motivation",
-    description:
-      "Track reps, not vibes. Real progress appears when the numbers move and the work ships."
-  }
-];
-
 export function LandingPage() {
   return (
     <main className="lp-root">
@@ -29,51 +8,56 @@ export function LandingPage() {
       <div className="lp-orb lp-orb-b" aria-hidden />
       <div className="lp-orb lp-orb-c" aria-hidden />
 
-      <header className="lp-topbar">
-        <p className="lp-brand">100x100 Pomodoro</p>
-        <Link to="/app" className="lp-skip">
-          Skip to App
-        </Link>
-      </header>
-
       <section className="lp-hero">
-        <p className="lp-kicker">The 100x100 Method</p>
-        <h1>Master 100 Skills with 100 Focus Sessions Each.</h1>
-        <p className="lp-copy">
-          This is not another productivity toy. It is a performance system for people who want
-          concrete competence, visible reps, and a body of work that compounds over months.
-        </p>
+        <div className="lp-hero-grid">
+          <div>
+            <p className="lp-kicker">100x100 Pomodoro</p>
+            <h1>A simple way to track deep practice.</h1>
+            <p className="lp-copy">
+              Pick up to 100 skills and invest up to 100 Pomodoro sessions per skill. The app
+              keeps progress, notes, and links in one local-first workspace.
+            </p>
 
-        <div className="lp-hero-actions">
-          <Link to="/app" className="lp-cta-primary">
-            Enter the 100x100 Studio
-          </Link>
-          <span>No account. Local-first. Start now.</span>
-        </div>
-      </section>
+            <div className="lp-quick">
+              <p>1. Choose a skill.</p>
+              <p>2. Run focus sessions.</p>
+              <p>3. Track sessions and notes.</p>
+            </div>
 
-      <section className="lp-value-grid" aria-label="Core value propositions">
-        {valueCards.map((card, index) => (
-          <article
-            key={card.title}
-            className="lp-value-card"
-            style={{ animationDelay: `${160 + index * 120}ms` }}
-          >
-            <p className="lp-card-step">{card.step}</p>
-            <h2>{card.title}</h2>
-            <p>{card.description}</p>
-          </article>
-        ))}
-      </section>
+            <div className="lp-hero-actions">
+              <Link to="/app" className="lp-cta-primary">
+                Open the App
+              </Link>
+              <span>Local-first. No account.</span>
+            </div>
+          </div>
 
-      <section className="lp-final">
-        <p className="lp-final-kicker">Ready to ship your future self?</p>
-        <h2>Start the interface. Track the reps. Build the proof.</h2>
-        <div className="lp-final-actions">
-          <Link to="/app" className="lp-cta-secondary">
-            Open Interface
-          </Link>
-          <p>100 skills x 100 sessions = 10,000 focused reps.</p>
+          <aside className="lp-preview" aria-hidden>
+            <div className="lp-preview-top">
+              <p>Current Skill</p>
+              <strong>Deep Learning</strong>
+              <span>37 / 100 sessions</span>
+            </div>
+
+            <div className="lp-preview-progress">
+              <div className="lp-preview-progress-bar" />
+            </div>
+
+            <div className="lp-preview-metrics">
+              <article>
+                <p>Today</p>
+                <strong>4 Focus</strong>
+              </article>
+              <article>
+                <p>Week</p>
+                <strong>23 Focus</strong>
+              </article>
+              <article>
+                <p>Streak</p>
+                <strong>9 Days</strong>
+              </article>
+            </div>
+          </aside>
         </div>
       </section>
     </main>
