@@ -17,6 +17,7 @@ export function SkillDetailPage({ state, dispatch }: SkillDetailPageProps) {
   const [newLinkUrl, setNewLinkUrl] = useState("");
 
   const renderedNotes = useMemo(() => renderMarkdown(skill?.notesMd ?? ""), [skill?.notesMd]);
+  const noteWordCount = skill?.notesMd.trim() ? skill.notesMd.trim().split(/\s+/).length : 0;
 
   if (!skill) {
     return (
@@ -47,9 +48,13 @@ export function SkillDetailPage({ state, dispatch }: SkillDetailPageProps) {
     setNewLinkUrl("");
   }
 
+  const progressPercent = Math.min(100, (skill.completedSessions / TARGET_SESSIONS) * 100);
+  const remainingSessions = Math.max(0, TARGET_SESSIONS - skill.completedSessions);
+  const isActiveSkill = state.timer.activeSkillId === skill.id;
+
   return (
-    <main className="shell">
-      <section className="card detail-header">
+    <main className="shell detail-shell">
+      <section className="card detail-header detail-hero">
         <div className="detail-nav">
           <Link to="/app" className="inline-link">
             &lt;- Back to App
@@ -58,23 +63,53 @@ export function SkillDetailPage({ state, dispatch }: SkillDetailPageProps) {
             Back to Motivation
           </Link>
         </div>
-        <p className="eyebrow">Skill Detail</p>
-        <input
-          className="title-input"
-          value={skill.title}
-          onChange={(event) =>
-            dispatch({
-              type: "updateSkillTitle",
-              skillId: skill.id,
-              title: event.target.value
-            })
-          }
-          aria-label="Skill title"
-          maxLength={120}
-        />
-        <p>
-          {skill.completedSessions} / {TARGET_SESSIONS} sessions
-        </p>
+
+        <div className="detail-hero-grid">
+          <div className="detail-hero-copy">
+            <p className="eyebrow">Skill Detail</p>
+            <input
+              className="title-input"
+              value={skill.title}
+              onChange={(event) =>
+                dispatch({
+                  type: "updateSkillTitle",
+                  skillId: skill.id,
+                  title: event.target.value
+                })
+              }
+              aria-label="Skill title"
+              maxLength={120}
+            />
+            <p className="detail-summary">
+              Keep notes, references, and session counts together so each practice block compounds
+              instead of resetting every time you return.
+            </p>
+
+            <div className="detail-meta-row">
+              <span className="detail-chip">
+                {skill.completedSessions} / {TARGET_SESSIONS} sessions
+              </span>
+              <span className="detail-chip">{remainingSessions} remaining</span>
+              <span className="detail-chip">{skill.links.length} resources</span>
+              <span className="detail-chip">{noteWordCount} note words</span>
+              {isActiveSkill && <span className="detail-chip is-active">Active timer skill</span>}
+            </div>
+          </div>
+
+          <aside className="detail-progress-panel">
+            <p>Progress to 100</p>
+            <strong>{Math.round(progressPercent)}%</strong>
+            <div className="progress-track progress-track-lg" aria-hidden>
+              <div className="progress-fill" style={{ width: `${progressPercent}%` }} />
+            </div>
+            <span>
+              {remainingSessions === 0
+                ? "Skill target reached. Keep polishing the edge."
+                : `${remainingSessions} sessions left to complete the full commitment.`}
+            </span>
+          </aside>
+        </div>
+
         <div className="inline-actions">
           <button
             type="button"
@@ -107,7 +142,12 @@ export function SkillDetailPage({ state, dispatch }: SkillDetailPageProps) {
 
       <section className="detail-grid">
         <article className="card detail-card">
-          <h2>Report Notes (Markdown)</h2>
+          <div className="detail-card-heading">
+            <div>
+              <h2>Report Notes (Markdown)</h2>
+              <p>Capture what worked, what stalled, and what to do in the next session.</p>
+            </div>
+          </div>
           <textarea
             value={skill.notesMd}
             onChange={(event) =>
@@ -123,14 +163,35 @@ export function SkillDetailPage({ state, dispatch }: SkillDetailPageProps) {
           />
         </article>
 
-        <article className="card detail-card">
-          <h2>Preview</h2>
-          <div className="markdown-preview" dangerouslySetInnerHTML={{ __html: renderedNotes }} />
+        <article className="card detail-card detail-preview-card">
+          <div className="detail-card-heading">
+            <div>
+              <h2>Preview</h2>
+              <p>
+                {skill.notesMd.trim()
+                  ? "Rendered live from your markdown notes."
+                  : "Write a short debrief, checklist, or insight log to populate this view."}
+              </p>
+            </div>
+          </div>
+          {skill.notesMd.trim() ? (
+            <div className="markdown-preview" dangerouslySetInnerHTML={{ __html: renderedNotes }} />
+          ) : (
+            <div className="markdown-preview markdown-preview-empty">
+              <p>No notes yet. Start with what you practiced and what to repeat next time.</p>
+            </div>
+          )}
         </article>
       </section>
 
-      <section className="card detail-card">
-        <h2>Resources</h2>
+      <section className="card detail-card detail-resources">
+        <div className="detail-card-heading">
+          <div>
+            <h2>Resources</h2>
+            <p>Keep only the links that help you restart quickly and practice with intent.</p>
+          </div>
+          <span className="detail-meta-inline">{skill.links.length} saved</span>
+        </div>
 
         <form onSubmit={handleCreateLink} className="resource-form">
           <input
@@ -194,7 +255,11 @@ export function SkillDetailPage({ state, dispatch }: SkillDetailPageProps) {
             </article>
           ))}
 
-          {skill.links.length === 0 && <p>No resources yet.</p>}
+          {skill.links.length === 0 && (
+            <div className="resource-empty">
+              <p>No resources yet. Add a prompt, course note, article, or reference link.</p>
+            </div>
+          )}
         </div>
       </section>
     </main>
