@@ -10,6 +10,7 @@ describe("App integration", () => {
   });
 
   it("shows the landing page and opens the app via CTA", () => {
+    window.localStorage.removeItem(STORAGE_KEY);
     window.location.hash = "#/";
 
     render(
@@ -18,9 +19,11 @@ describe("App integration", () => {
       </HashRouter>
     );
 
-    expect(screen.getByText("A simple way to track deep practice.")).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: /100 skills\. one place to keep them moving\./i })
+    ).toBeInTheDocument();
 
-    fireEvent.click(screen.getByRole("link", { name: "Open the App" }));
+    fireEvent.click(screen.getByRole("link", { name: "Open Tracker" }));
 
     expect(screen.getByText("Pomodoro Timer")).toBeInTheDocument();
     expect(window.location.hash).toBe("#/app");
@@ -72,7 +75,7 @@ describe("App integration", () => {
       vi.runOnlyPendingTimers();
     });
 
-    expect(screen.getByText("1 / 100 sessions")).toBeInTheDocument();
+    expect(screen.getAllByText("1 / 100 sessions").length).toBeGreaterThan(0);
     expect(screen.getByText("Break")).toBeInTheDocument();
   });
 
