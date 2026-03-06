@@ -69,6 +69,7 @@ describe("storage", () => {
     const fast = loaded.skills.find((skill) => skill.title === "Do Things Fast");
     const output = loaded.skills.find((skill) => skill.title === "Never Have Zero-Output Days");
     const nostalgia = loaded.skills.find((skill) => skill.title === "Be Nostalgic for Now");
+    const environment = loaded.skills.find((skill) => skill.title === "Environment Matters");
 
     expect(initiative).toBeDefined();
     expect(initiative!.notesMd).toContain("Stop asking for approval and permission.");
@@ -116,6 +117,9 @@ describe("storage", () => {
     expect(nostalgia).toBeDefined();
     expect(nostalgia!.notesMd).toContain("Later, you'll be nostalgic for right now.");
     expect(nostalgia!.notesMd).toContain("show up more fully before the moment passes");
+    expect(environment).toBeDefined();
+    expect(environment!.notesMd).toContain("Environment matters a lot.");
+    expect(environment!.notesMd).toContain("if you can get by being average, you probably will.");
   });
 
   it("merges imported notes into matching aliases without creating duplicates", () => {

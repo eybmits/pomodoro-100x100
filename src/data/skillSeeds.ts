@@ -388,6 +388,33 @@ Later, you'll be nostalgic for right now.
 - Treat the current chapter as something you may miss sooner than you expect.
 - Let future nostalgia sharpen gratitude and attention in the present.
 - Use that perspective to show up more fully before the moment passes.`
+  },
+  {
+    key: "environmentmatters",
+    title: "Environment Matters",
+    aliases: ["Environment Matters"],
+    slots: [103],
+    sourceTitles: [
+      "Environment matters a lot. Go where you can flourish maximally. Put yourself in environments that demand your best - if you can get by being average, you probably will."
+    ],
+    sourceLabel: "Manual Entry",
+    status: "Not started",
+    completedSessions: 0,
+    sourceStartDates: [],
+    updatedAtIso: "2026-03-06T17:34:00.000Z",
+    notesMd: `## Focus
+Choose environments that draw out your best work instead of rewarding your lowest acceptable effort.
+
+## Principle
+Environment matters a lot.
+Go where you can flourish maximally.
+Put yourself in environments that demand your best - if you can get by being average, you probably will.
+
+## Practice
+- Audit the environments that shape your standards, habits, and ambition.
+- Move toward places, people, and systems that require more from you.
+- Reduce exposure to contexts where mediocrity is easy and invisible.
+- Treat environment selection as a force multiplier, not as a background detail.`
   }
 ];
 
