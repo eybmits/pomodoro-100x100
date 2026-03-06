@@ -57,10 +57,14 @@ describe("storage", () => {
     const initiative = loaded.skills.find(
       (skill) => skill.title === "Initiative Without Permission"
     );
+    const hours = loaded.skills.find((skill) => skill.title === "Hours Still Matter");
 
     expect(initiative).toBeDefined();
     expect(initiative!.notesMd).toContain("Stop asking for approval and permission.");
     expect(initiative!.notesMd).toContain('plant the "this is happening" flag');
+    expect(hours).toBeDefined();
+    expect(hours!.notesMd).toContain("The 10,000-hour rule is true.");
+    expect(hours!.notesMd).toContain("they do not replace the work");
   });
 
   it("merges imported notes into matching aliases without creating duplicates", () => {

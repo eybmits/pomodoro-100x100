@@ -38,6 +38,33 @@ People will come along for the ride.
 - Decide as if it is already in motion.
 - Take the first irreversible step within 24 hours.
 - Let momentum create social proof afterward.`
+  },
+  {
+    key: "hoursstillmatter",
+    title: "Hours Still Matter",
+    aliases: ["Hours Still Matter", "10,000-Hour Rule"],
+    slots: [90],
+    sourceTitles: [
+      "The 10,000-hour rule is true. At the end of the day, you still have to put the hours in. Intelligence, efficiency, and great systems help - but they do not replace the work."
+    ],
+    sourceLabel: "Manual Entry",
+    status: "Not started",
+    completedSessions: 0,
+    sourceStartDates: [],
+    updatedAtIso: "2026-03-06T15:42:00.000Z",
+    notesMd: `## Focus
+Respect the fact that real skill still requires time on task.
+
+## Principle
+The 10,000-hour rule is true.
+At the end of the day, you still have to put the hours in.
+Intelligence, efficiency, and great systems help, but they do not replace the work.
+
+## Practice
+- Track the hours honestly.
+- Use systems to support repetition, not to avoid it.
+- Judge progress by accumulated practice, not just insight.
+- Default to another focused block when in doubt.`
   }
 ];
 
