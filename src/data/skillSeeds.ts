@@ -339,6 +339,32 @@ When no urgency exists, create some.
 - Start before your mind inflates the effort.
 - Use short deadlines to create movement when the environment does not.
 - Treat speed as clarity plus commitment, not as panic.`
+  },
+  {
+    key: "neverhavezerooutputdays",
+    title: "Never Have Zero-Output Days",
+    aliases: ["Never Have Zero-Output Days"],
+    slots: [101],
+    sourceTitles: [
+      "Figure out your primary focus, then make progress on it every day - first thing in the morning, no exceptions. Never have zero-output days."
+    ],
+    sourceLabel: "Manual Entry",
+    status: "Not started",
+    completedSessions: 0,
+    sourceStartDates: [],
+    updatedAtIso: "2026-03-06T17:24:00.000Z",
+    notesMd: `## Focus
+Identify your primary focus and move it forward every day before the rest of life dilutes your attention.
+
+## Principle
+Figure out your primary focus, then make progress on it every day - first thing in the morning, no exceptions.
+Never have zero-output days.
+
+## Practice
+- Define the one priority that deserves daily movement.
+- Touch it first before messages, noise, or logistics take over.
+- Make the minimum daily unit small enough that you never miss twice.
+- Judge the day partly by whether the primary focus moved at all.`
   }
 ];
 

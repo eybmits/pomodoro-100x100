@@ -67,6 +67,7 @@ describe("storage", () => {
     const opinions = loaded.skills.find((skill) => skill.title === "Have Opinions");
     const doing = loaded.skills.find((skill) => skill.title === "Doing Is Energizing");
     const fast = loaded.skills.find((skill) => skill.title === "Do Things Fast");
+    const output = loaded.skills.find((skill) => skill.title === "Never Have Zero-Output Days");
 
     expect(initiative).toBeDefined();
     expect(initiative!.notesMd).toContain("Stop asking for approval and permission.");
@@ -108,6 +109,9 @@ describe("storage", () => {
     expect(fast).toBeDefined();
     expect(fast!.notesMd).toContain("Do things fast.");
     expect(fast!.notesMd).toContain("When no urgency exists, create some.");
+    expect(output).toBeDefined();
+    expect(output!.notesMd).toContain("Never have zero-output days.");
+    expect(output!.notesMd).toContain("first thing in the morning, no exceptions.");
   });
 
   it("merges imported notes into matching aliases without creating duplicates", () => {
