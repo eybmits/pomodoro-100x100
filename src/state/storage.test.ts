@@ -70,6 +70,7 @@ describe("storage", () => {
     const output = loaded.skills.find((skill) => skill.title === "Never Have Zero-Output Days");
     const nostalgia = loaded.skills.find((skill) => skill.title === "Be Nostalgic for Now");
     const environment = loaded.skills.find((skill) => skill.title === "Environment Matters");
+    const fun = loaded.skills.find((skill) => skill.title === "Fun Is Underrated");
 
     expect(initiative).toBeDefined();
     expect(initiative!.notesMd).toContain("Stop asking for approval and permission.");
@@ -120,6 +121,9 @@ describe("storage", () => {
     expect(environment).toBeDefined();
     expect(environment!.notesMd).toContain("Environment matters a lot.");
     expect(environment!.notesMd).toContain("if you can get by being average, you probably will.");
+    expect(fun).toBeDefined();
+    expect(fun!.notesMd).toContain("Fun is underrated.");
+    expect(fun!.notesMd).toContain("You can feel it in your body.");
   });
 
   it("merges imported notes into matching aliases without creating duplicates", () => {

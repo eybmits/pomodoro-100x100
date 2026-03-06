@@ -415,6 +415,33 @@ Put yourself in environments that demand your best - if you can get by being ave
 - Move toward places, people, and systems that require more from you.
 - Reduce exposure to contexts where mediocrity is easy and invisible.
 - Treat environment selection as a force multiplier, not as a background detail.`
+  },
+  {
+    key: "funisunderrated",
+    title: "Fun Is Underrated",
+    aliases: ["Fun Is Underrated"],
+    slots: [104],
+    sourceTitles: [
+      "Fun is underrated. The best and most creative work usually grows out of joy, curiosity, and excitement. You can feel it in your body."
+    ],
+    sourceLabel: "Manual Entry",
+    status: "Not started",
+    completedSessions: 0,
+    sourceStartDates: [],
+    updatedAtIso: "2026-03-06T17:38:00.000Z",
+    notesMd: `## Focus
+Take joy, curiosity, and excitement seriously as signals that you are near your most alive and creative work.
+
+## Principle
+Fun is underrated.
+The best and most creative work usually grows out of joy, curiosity, and excitement.
+You can feel it in your body.
+
+## Practice
+- Notice where energy and fascination rise naturally.
+- Design work so that curiosity gets to lead, not just discipline.
+- Use bodily aliveness as data about where real creative traction may live.
+- Stop treating seriousness and heaviness as proof of importance.`
   }
 ];
 
