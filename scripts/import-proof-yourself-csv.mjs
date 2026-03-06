@@ -56,6 +56,8 @@ const TITLE_OVERRIDES = new Map([
   ["3D-Druck", "3D Printing"]
 ]);
 
+const EXCLUDED_TITLES = new Set(["Sex", "Sex and Intimacy"]);
+
 function normalizeKey(value) {
   return value
     .normalize("NFD")
@@ -156,6 +158,10 @@ function buildSeeds(rows) {
     }
 
     const rawTitle = parsed.title.trim();
+    if (EXCLUDED_TITLES.has(rawTitle)) {
+      continue;
+    }
+
     const title = TITLE_OVERRIDES.get(rawTitle) ?? rawTitle;
     const key = normalizeKey(title);
     const status = (row.Status ?? "").trim() || "Not started";

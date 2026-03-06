@@ -15,6 +15,8 @@ import { createId } from "../utils/ids";
 import { nowIso } from "../utils/time";
 
 export const STORAGE_KEY = "pomodoro100.v1";
+const REMOVED_IMPORTED_SKILL_KEYS = new Set(["sexandintimacy"]);
+const IMPORTED_ROADMAP_MARKER = 'Imported from the "Proof Yourself Hard Things" roadmap.';
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null;
@@ -101,15 +103,25 @@ function sanitizeTimer(rawTimer: unknown, skills: Skill[]): AppState["timer"] {
   };
 }
 
+function shouldRemoveDeprecatedImportedSkill(skill: Skill): boolean {
+  if (!REMOVED_IMPORTED_SKILL_KEYS.has(getImportedSkillKey(skill.title))) {
+    return false;
+  }
+
+  const importedLikeNotes =
+    !skill.notesMd.trim() || skill.notesMd.includes(IMPORTED_ROADMAP_MARKER);
+
+  return importedLikeNotes && skill.completedSessions === 0 && skill.links.length === 0;
+}
+
 function mergeImportedSkills(state: AppState): AppState {
-  const nextSkills = [...state.skills];
+  const nextSkills = state.skills.filter((skill) => !shouldRemoveDeprecatedImportedSkill(skill));
   const skillIndexByKey = new Map<string, number>();
+  let hasChanged = nextSkills.length !== state.skills.length;
 
   for (const [index, skill] of nextSkills.entries()) {
     skillIndexByKey.set(getImportedSkillKey(skill.title), index);
   }
-
-  let hasChanged = false;
 
   for (const seed of IMPORTED_SKILL_SEEDS) {
     const existingIndex = skillIndexByKey.get(seed.key);

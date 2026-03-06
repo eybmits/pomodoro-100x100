@@ -12,7 +12,7 @@ export interface ImportedSkillSeed {
   sourceStartDates: string[];
 }
 
-export const IMPORTED_SKILLS_IMPORTED_AT = "2026-03-06T15:11:36.064Z";
+export const IMPORTED_SKILLS_IMPORTED_AT = "2026-03-06T15:21:36.168Z";
 
 export const IMPORTED_SKILL_SEEDS: ImportedSkillSeed[] = [
   {
@@ -195,23 +195,6 @@ export const IMPORTED_SKILL_SEEDS: ImportedSkillSeed[] = [
     ],
     "sourceTitles": [
       "Hacking"
-    ],
-    "status": "Not started",
-    "completedSessions": 0,
-    "sourceStartDates": []
-  },
-  {
-    "key": "sexandintimacy",
-    "title": "Sex and Intimacy",
-    "aliases": [
-      "Sex",
-      "Sex and Intimacy"
-    ],
-    "slots": [
-      16
-    ],
-    "sourceTitles": [
-      "Sex"
     ],
     "status": "Not started",
     "completedSessions": 0,

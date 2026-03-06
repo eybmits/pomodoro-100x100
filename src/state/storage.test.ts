@@ -85,4 +85,37 @@ describe("storage", () => {
     expect(spanishSkills[0]!.title).toBe("Learn Spanish");
     expect(spanishSkills[0]!.notesMd).toContain('Imported from the "Proof Yourself Hard Things" roadmap.');
   });
+
+  it("removes deprecated imported skills that were previously seeded", () => {
+    window.localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify({
+        schemaVersion: 1,
+        skills: [
+          {
+            id: "legacy-imported-skill",
+            title: "Sex and Intimacy",
+            targetSessions: 100,
+            completedSessions: 0,
+            notesMd:
+              '## Focus\n\n## Imported Roadmap\n- Imported from the "Proof Yourself Hard Things" roadmap.',
+            links: [],
+            createdAtIso: "2026-03-05T00:00:00.000Z",
+            updatedAtIso: "2026-03-05T00:00:00.000Z"
+          }
+        ],
+        timer: {
+          activeSkillId: "legacy-imported-skill",
+          phase: "focus",
+          remainingSec: 1500,
+          isRunning: false
+        }
+      })
+    );
+
+    const loaded = loadState();
+
+    expect(loaded.skills.some((skill) => skill.title === "Sex and Intimacy")).toBe(false);
+    expect(loaded.timer.activeSkillId).not.toBe("legacy-imported-skill");
+  });
 });
