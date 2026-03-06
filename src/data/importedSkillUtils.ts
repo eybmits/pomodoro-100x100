@@ -1,4 +1,4 @@
-import { IMPORTED_SKILL_SEEDS, type ImportedSkillSeed } from "./importedSkills";
+import { SKILL_SEEDS, type SkillSeed } from "./skillSeeds";
 
 function normalizeLookup(value: string): string {
   return value
@@ -11,7 +11,7 @@ function normalizeLookup(value: string): string {
 
 const importedAliasToKey = new Map<string, string>();
 
-for (const seed of IMPORTED_SKILL_SEEDS) {
+for (const seed of SKILL_SEEDS) {
   importedAliasToKey.set(seed.key, seed.key);
 
   for (const alias of seed.aliases) {
@@ -24,7 +24,11 @@ export function getImportedSkillKey(title: string): string {
   return importedAliasToKey.get(normalized) ?? normalized;
 }
 
-export function composeImportedSkillNotes(seed: ImportedSkillSeed): string {
+export function composeImportedSkillNotes(seed: SkillSeed): string {
+  if (seed.notesMd?.trim()) {
+    return seed.notesMd;
+  }
+
   const slotLabel =
     seed.slots.length === 1
       ? `${seed.slots[0]} / 100`
@@ -43,7 +47,7 @@ export function composeImportedSkillNotes(seed: ImportedSkillSeed): string {
     `Build practical ability in ${seed.title} through repeated, well-scoped Pomodoro blocks.`,
     "",
     "## Imported Roadmap",
-    '- Imported from the "Proof Yourself Hard Things" roadmap.',
+    `- Imported from the "${seed.sourceLabel ?? "Proof Yourself Hard Things"}" roadmap.`,
     `- Roadmap slot${seed.slots.length === 1 ? "" : "s"}: ${slotLabel}.`,
     `- Source entr${seed.sourceTitles.length === 1 ? "y" : "ies"}: ${sourceLabel}.`,
     `- Source status: ${seed.status}.`,

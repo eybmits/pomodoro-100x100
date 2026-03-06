@@ -9,7 +9,7 @@ import {
   type SkillLink,
   type TimerPhase
 } from "../types";
-import { IMPORTED_SKILLS_IMPORTED_AT, IMPORTED_SKILL_SEEDS } from "../data/importedSkills";
+import { SKILL_SEEDS, SKILL_SEEDS_IMPORTED_AT } from "../data/skillSeeds";
 import { composeImportedSkillNotes, getImportedSkillKey } from "../data/importedSkillUtils";
 import { createId } from "../utils/ids";
 import { nowIso } from "../utils/time";
@@ -123,7 +123,8 @@ function mergeImportedSkills(state: AppState): AppState {
     skillIndexByKey.set(getImportedSkillKey(skill.title), index);
   }
 
-  for (const seed of IMPORTED_SKILL_SEEDS) {
+  for (const seed of SKILL_SEEDS) {
+    const updatedAtIso = seed.updatedAtIso ?? SKILL_SEEDS_IMPORTED_AT;
     const existingIndex = skillIndexByKey.get(seed.key);
     const importedNotes = composeImportedSkillNotes(seed);
 
@@ -135,7 +136,7 @@ function mergeImportedSkills(state: AppState): AppState {
         mergedSkill = {
           ...mergedSkill,
           notesMd: importedNotes,
-          updatedAtIso: IMPORTED_SKILLS_IMPORTED_AT
+          updatedAtIso
         };
       }
 
@@ -143,10 +144,10 @@ function mergeImportedSkills(state: AppState): AppState {
         mergedSkill = {
           ...mergedSkill,
           completedSessions: seed.completedSessions,
-          updatedAtIso: IMPORTED_SKILLS_IMPORTED_AT,
+          updatedAtIso,
           lastSessionAtIso:
             seed.completedSessions > 0
-              ? existingSkill.lastSessionAtIso ?? IMPORTED_SKILLS_IMPORTED_AT
+              ? existingSkill.lastSessionAtIso ?? updatedAtIso
               : existingSkill.lastSessionAtIso
         };
       }
@@ -170,9 +171,9 @@ function mergeImportedSkills(state: AppState): AppState {
       completedSessions: seed.completedSessions,
       notesMd: importedNotes,
       links: [],
-      createdAtIso: IMPORTED_SKILLS_IMPORTED_AT,
-      updatedAtIso: IMPORTED_SKILLS_IMPORTED_AT,
-      lastSessionAtIso: seed.completedSessions > 0 ? IMPORTED_SKILLS_IMPORTED_AT : undefined
+      createdAtIso: updatedAtIso,
+      updatedAtIso,
+      lastSessionAtIso: seed.completedSessions > 0 ? updatedAtIso : undefined
     };
 
     nextSkills.push(importedSkill);

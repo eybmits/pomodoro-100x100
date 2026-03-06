@@ -50,6 +50,19 @@ describe("storage", () => {
     expect(loaded.schemaVersion).toBe(1);
   });
 
+  it("includes curated manual entries with custom notes", () => {
+    window.localStorage.removeItem(STORAGE_KEY);
+
+    const loaded = loadState();
+    const initiative = loaded.skills.find(
+      (skill) => skill.title === "Initiative Without Permission"
+    );
+
+    expect(initiative).toBeDefined();
+    expect(initiative!.notesMd).toContain("Stop asking for approval and permission.");
+    expect(initiative!.notesMd).toContain('plant the "this is happening" flag');
+  });
+
   it("merges imported notes into matching aliases without creating duplicates", () => {
     window.localStorage.setItem(
       STORAGE_KEY,
