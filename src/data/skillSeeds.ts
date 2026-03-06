@@ -207,6 +207,31 @@ To do truly great work, you have to aim to stand with the greats.
 - Judge drafts against excellence, not against what is merely acceptable.
 - Use ambition as a corrective against your natural drift toward average work.
 - Ask what would make the result worthy of the greats, then build toward that.`
+  },
+  {
+    key: "donotrationalizewhatfeelswrong",
+    title: "Do Not Rationalize What Feels Wrong",
+    aliases: ["Do Not Rationalize What Feels Wrong"],
+    slots: [96],
+    sourceTitles: [
+      "Be careful about rationalizing something that does not feel right."
+    ],
+    sourceLabel: "Manual Entry",
+    status: "Not started",
+    completedSessions: 0,
+    sourceStartDates: [],
+    updatedAtIso: "2026-03-06T17:02:00.000Z",
+    notesMd: `## Focus
+Treat the internal signal that something is off as information, not as an inconvenience to explain away.
+
+## Principle
+Be careful about rationalizing something that does not feel right.
+
+## Practice
+- Pause when your first honest reaction says something is off.
+- Separate explanation from truth-seeking.
+- Ask what you would see if you stopped defending the situation.
+- Respect the signal before you build a story around it.`
   }
 ];
 
