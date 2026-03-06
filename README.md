@@ -26,10 +26,20 @@ npm install
 npm run dev
 ```
 
+## Import a Roadmap CSV
+Use the importer to turn the Notion-style CSV into checked-in seed data for the app:
+
+```bash
+npm run import:proof-yourself -- "/absolute/path/to/Proof Yourself Hard Things ..._all.csv"
+```
+
+The script writes `src/data/importedSkills.ts` and the app merges those seeds into local storage without re-adding obvious duplicates such as alternate spellings or translated source titles.
+
 ## Scripts
 ```bash
 npm run dev
 npm run typecheck
+npm run import:proof-yourself -- "/absolute/path/to/file.csv"
 npm run test
 npm run build
 npm run preview

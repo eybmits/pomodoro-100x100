@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { getImportedSkillKey } from "../data/importedSkillUtils";
 import { appReducer } from "./reducer";
 import { loadState, saveState, STORAGE_KEY } from "./storage";
 import { createDefaultAppState } from "../types";
@@ -16,23 +17,24 @@ describe("storage", () => {
 
     saveState(state);
     const loaded = loadState();
+    const rust = loaded.skills.find((skill) => skill.title === "Rust");
 
     expect(loaded.schemaVersion).toBe(1);
-    expect(loaded.skills).toHaveLength(1);
-    expect(loaded.skills[0]!.title).toBe("Rust");
-    expect(loaded.skills[0]!.notesMd).toBe("## Learnings");
+    expect(rust).toBeDefined();
+    expect(rust!.notesMd).toBe("## Learnings");
+    expect(loaded.skills.some((skill) => skill.title === "Chess")).toBe(true);
   });
 
-  it("falls back to defaults on invalid json", () => {
+  it("falls back to imported defaults on invalid json", () => {
     window.localStorage.setItem(STORAGE_KEY, "{not-valid-json}");
 
     const loaded = loadState();
 
-    expect(loaded.skills).toHaveLength(0);
-    expect(loaded.timer.activeSkillId).toBeNull();
+    expect(loaded.skills.length).toBeGreaterThan(0);
+    expect(loaded.timer.activeSkillId).not.toBeNull();
   });
 
-  it("falls back to defaults on unknown schema version", () => {
+  it("falls back to imported defaults on unknown schema version", () => {
     window.localStorage.setItem(
       STORAGE_KEY,
       JSON.stringify({
@@ -44,7 +46,43 @@ describe("storage", () => {
 
     const loaded = loadState();
 
-    expect(loaded.skills).toHaveLength(0);
+    expect(loaded.skills.length).toBeGreaterThan(0);
     expect(loaded.schemaVersion).toBe(1);
+  });
+
+  it("merges imported notes into matching aliases without creating duplicates", () => {
+    window.localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify({
+        schemaVersion: 1,
+        skills: [
+          {
+            id: "learn-spanish",
+            title: "Learn Spanish",
+            targetSessions: 100,
+            completedSessions: 0,
+            notesMd: "",
+            links: [],
+            createdAtIso: "2026-03-05T00:00:00.000Z",
+            updatedAtIso: "2026-03-05T00:00:00.000Z"
+          }
+        ],
+        timer: {
+          activeSkillId: null,
+          phase: "focus",
+          remainingSec: 1500,
+          isRunning: false
+        }
+      })
+    );
+
+    const loaded = loadState();
+    const spanishSkills = loaded.skills.filter(
+      (skill) => getImportedSkillKey(skill.title) === "spanish"
+    );
+
+    expect(spanishSkills).toHaveLength(1);
+    expect(spanishSkills[0]!.title).toBe("Learn Spanish");
+    expect(spanishSkills[0]!.notesMd).toContain('Imported from the "Proof Yourself Hard Things" roadmap.');
   });
 });

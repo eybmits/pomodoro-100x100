@@ -1,7 +1,26 @@
 import { Link } from "react-router-dom";
+import { TARGET_SESSIONS, type AppState } from "../types";
 
-export function LandingPage() {
-  const trackedSkills = 42;
+interface LandingPageProps {
+  state: AppState;
+}
+
+export function LandingPage({ state }: LandingPageProps) {
+  const trackedSkills = state.skills.length;
+  const featuredSkill =
+    state.skills.find((skill) => skill.id === state.timer.activeSkillId) ??
+    state.skills.find((skill) => skill.completedSessions > 0) ??
+    state.skills[0] ??
+    null;
+  const featuredSessions = featuredSkill?.completedSessions ?? 0;
+  const featuredPercent = featuredSkill
+    ? Math.min(100, (featuredSessions / TARGET_SESSIONS) * 100)
+    : 0;
+  const overallSessions = state.skills.reduce((sum, skill) => sum + skill.completedSessions, 0);
+  const nextActionCopy = featuredSkill ? "Log the next block" : "Add the first skill";
+  const activeIndex = featuredSkill
+    ? state.skills.findIndex((skill) => skill.id === featuredSkill.id)
+    : -1;
 
   return (
     <main className="lp-root">
@@ -41,18 +60,18 @@ export function LandingPage() {
           <div className="lp-stage-strip">
             <article className="lp-stage-stat">
               <p>Tracked</p>
-              <strong>42</strong>
+              <strong>{trackedSkills}</strong>
               <span>skills</span>
             </article>
             <article className="lp-stage-stat">
               <p>Current</p>
-              <strong>Essay Draft</strong>
-              <span>42 / 100</span>
+              <strong>{featuredSkill?.title ?? "Roadmap Ready"}</strong>
+              <span>{featuredSkill ? `${featuredSessions} / ${TARGET_SESSIONS}` : "imported set"}</span>
             </article>
             <article className="lp-stage-stat">
               <p>Next</p>
-              <strong>Rewrite intro</strong>
-              <span>today</span>
+              <strong>{nextActionCopy}</strong>
+              <span>{overallSessions} sessions logged</span>
             </article>
           </div>
 
@@ -66,7 +85,7 @@ export function LandingPage() {
               <div className="lp-stage-grid">
                 {Array.from({ length: 100 }, (_, index) => {
                   const isFilled = index < trackedSkills;
-                  const isActive = index === 12;
+                  const isActive = index === activeIndex;
 
                   return (
                     <span
@@ -80,27 +99,36 @@ export function LandingPage() {
 
             <section className="lp-stage-focus">
               <p className="lp-stage-eyebrow">Current Project</p>
-              <strong className="lp-stage-title">Essay Draft</strong>
-              <p className="lp-stage-total">42 / 100 Pomodoros</p>
+              <strong className="lp-stage-title">{featuredSkill?.title ?? "100x100 Roadmap"}</strong>
+              <p className="lp-stage-total">
+                {featuredSkill
+                  ? `${featuredSessions} / ${TARGET_SESSIONS} Pomodoros`
+                  : `${trackedSkills} imported skills`}
+              </p>
 
               <div className="lp-stage-progress">
-                <div className="lp-stage-progress-fill" />
+                <div
+                  className="lp-stage-progress-fill"
+                  style={{ width: `${featuredPercent}%` }}
+                />
               </div>
 
               <div className="lp-stage-list">
                 <article>
-                  <span>Today</span>
-                  <strong>3 blocks</strong>
+                  <span>Mapped</span>
+                  <strong>{trackedSkills} skills</strong>
                 </article>
                 <article>
                   <span>Next</span>
-                  <strong>Rewrite intro</strong>
+                  <strong>{nextActionCopy}</strong>
                 </article>
               </div>
 
               <div className="lp-stage-note">
-                <span>Note</span>
-                <strong>Sources grouped. Intro angle is locked.</strong>
+                <span>Roadmap</span>
+                <strong>
+                  Imported skills already include English notes, source context, and a next-step prompt.
+                </strong>
               </div>
             </section>
           </div>

@@ -9,6 +9,8 @@ import {
   type SkillLink,
   type TimerPhase
 } from "../types";
+import { IMPORTED_SKILLS_IMPORTED_AT, IMPORTED_SKILL_SEEDS } from "../data/importedSkills";
+import { composeImportedSkillNotes, getImportedSkillKey } from "../data/importedSkillUtils";
 import { createId } from "../utils/ids";
 import { nowIso } from "../utils/time";
 
@@ -99,20 +101,106 @@ function sanitizeTimer(rawTimer: unknown, skills: Skill[]): AppState["timer"] {
   };
 }
 
+function mergeImportedSkills(state: AppState): AppState {
+  const nextSkills = [...state.skills];
+  const skillIndexByKey = new Map<string, number>();
+
+  for (const [index, skill] of nextSkills.entries()) {
+    skillIndexByKey.set(getImportedSkillKey(skill.title), index);
+  }
+
+  let hasChanged = false;
+
+  for (const seed of IMPORTED_SKILL_SEEDS) {
+    const existingIndex = skillIndexByKey.get(seed.key);
+    const importedNotes = composeImportedSkillNotes(seed);
+
+    if (existingIndex !== undefined) {
+      const existingSkill = nextSkills[existingIndex]!;
+      let mergedSkill = existingSkill;
+
+      if (!existingSkill.notesMd.trim() && importedNotes.trim()) {
+        mergedSkill = {
+          ...mergedSkill,
+          notesMd: importedNotes,
+          updatedAtIso: IMPORTED_SKILLS_IMPORTED_AT
+        };
+      }
+
+      if (existingSkill.completedSessions < seed.completedSessions) {
+        mergedSkill = {
+          ...mergedSkill,
+          completedSessions: seed.completedSessions,
+          updatedAtIso: IMPORTED_SKILLS_IMPORTED_AT,
+          lastSessionAtIso:
+            seed.completedSessions > 0
+              ? existingSkill.lastSessionAtIso ?? IMPORTED_SKILLS_IMPORTED_AT
+              : existingSkill.lastSessionAtIso
+        };
+      }
+
+      if (mergedSkill !== existingSkill) {
+        nextSkills[existingIndex] = mergedSkill;
+        hasChanged = true;
+      }
+
+      continue;
+    }
+
+    if (nextSkills.length >= MAX_SKILLS) {
+      break;
+    }
+
+    const importedSkill: Skill = {
+      id: createId(),
+      title: seed.title,
+      targetSessions: TARGET_SESSIONS,
+      completedSessions: seed.completedSessions,
+      notesMd: importedNotes,
+      links: [],
+      createdAtIso: IMPORTED_SKILLS_IMPORTED_AT,
+      updatedAtIso: IMPORTED_SKILLS_IMPORTED_AT,
+      lastSessionAtIso: seed.completedSessions > 0 ? IMPORTED_SKILLS_IMPORTED_AT : undefined
+    };
+
+    nextSkills.push(importedSkill);
+    skillIndexByKey.set(seed.key, nextSkills.length - 1);
+    hasChanged = true;
+  }
+
+  const activeSkillId =
+    state.timer.activeSkillId && nextSkills.some((skill) => skill.id === state.timer.activeSkillId)
+      ? state.timer.activeSkillId
+      : nextSkills[0]?.id ?? null;
+
+  if (!hasChanged && activeSkillId === state.timer.activeSkillId) {
+    return state;
+  }
+
+  return {
+    ...state,
+    skills: nextSkills,
+    timer: {
+      ...state.timer,
+      activeSkillId
+    }
+  };
+}
+
 export function loadState(): AppState {
   if (typeof window === "undefined") {
-    return createDefaultAppState();
+    return mergeImportedSkills(createDefaultAppState());
   }
 
   try {
     const raw = window.localStorage.getItem(STORAGE_KEY);
     if (!raw) {
-      return createDefaultAppState();
+      return mergeImportedSkills(createDefaultAppState());
     }
 
     const parsed: unknown = JSON.parse(raw);
     if (!isRecord(parsed) || parsed.schemaVersion !== 1) {
-      return createDefaultAppState();
+      return mergeImportedSkills(createDefaultAppState());
     }
 
     const skillsRaw = Array.isArray(parsed.skills) ? parsed.skills : [];
@@ -122,13 +210,13 @@ export function loadState(): AppState {
       .slice(0, MAX_SKILLS);
     const timer = sanitizeTimer(parsed.timer, skills);
 
-    return {
+    return mergeImportedSkills({
       schemaVersion: 1,
       skills,
       timer
-    };
+    });
   } catch {
-    return createDefaultAppState();
+    return mergeImportedSkills(createDefaultAppState());
   }
 }
 

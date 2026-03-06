@@ -22,7 +22,7 @@ export default function App() {
 
   return (
     <Routes>
-      <Route path="/" element={<LandingPage />} />
+      <Route path="/" element={<LandingPage state={state} />} />
       <Route path="/app" element={<DashboardPage state={state} dispatch={dispatch} />} />
       <Route path="/app/skill/:skillId" element={<SkillDetailPage state={state} dispatch={dispatch} />} />
       <Route path="/skill/:skillId" element={<LegacySkillRedirect />} />
