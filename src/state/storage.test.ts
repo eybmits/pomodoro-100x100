@@ -63,6 +63,7 @@ describe("storage", () => {
     const wrongness = loaded.skills.find(
       (skill) => skill.title === "Do Not Rationalize What Feels Wrong"
     );
+    const disproof = loaded.skills.find((skill) => skill.title === "If You Can't Disprove It");
 
     expect(initiative).toBeDefined();
     expect(initiative!.notesMd).toContain("Stop asking for approval and permission.");
@@ -88,6 +89,11 @@ describe("storage", () => {
       "Be careful about rationalizing something that does not feel right."
     );
     expect(wrongness!.notesMd).toContain("Respect the signal before you build a story around it.");
+    expect(disproof).toBeDefined();
+    expect(disproof!.notesMd).toContain(
+      "If you really can't disprove something, it has a chance of being right."
+    );
+    expect(disproof!.notesMd).toContain("Treat surviving scrutiny as a reason to investigate further");
   });
 
   it("merges imported notes into matching aliases without creating duplicates", () => {

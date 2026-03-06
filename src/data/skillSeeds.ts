@@ -232,6 +232,31 @@ Be careful about rationalizing something that does not feel right.
 - Separate explanation from truth-seeking.
 - Ask what you would see if you stopped defending the situation.
 - Respect the signal before you build a story around it.`
+  },
+  {
+    key: "ifyoucantdisproveit",
+    title: "If You Can't Disprove It",
+    aliases: ["If You Can't Disprove It"],
+    slots: [97],
+    sourceTitles: [
+      "If you really can't disprove something, it has a chance of being right."
+    ],
+    sourceLabel: "Manual Entry",
+    status: "Not started",
+    completedSessions: 0,
+    sourceStartDates: [],
+    updatedAtIso: "2026-03-06T17:06:00.000Z",
+    notesMd: `## Focus
+Take seriously the possibility that an idea may be right when your best scrutiny still cannot rule it out.
+
+## Principle
+If you really can't disprove something, it has a chance of being right.
+
+## Practice
+- Try to falsify the idea before you get attached to it.
+- Distinguish "I dislike it" from "I disproved it."
+- Leave room for uncomfortable possibilities that survive honest criticism.
+- Treat surviving scrutiny as a reason to investigate further, not to dismiss reflexively.`
   }
 ];
 
