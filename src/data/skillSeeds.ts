@@ -311,6 +311,34 @@ You need less "rest" than you think.
 - Start with one concrete action before negotiating with your mood.
 - Use movement and execution to create energy instead of waiting for energy first.
 - Treat purposeful effort as fuel, not just as expenditure.`
+  },
+  {
+    key: "dothingsfast",
+    title: "Do Things Fast",
+    aliases: ["Do Things Fast"],
+    slots: [100],
+    sourceTitles: [
+      "Do things fast. Most things don't actually take that long; procrastination is what makes them feel long. Slow is often fake. When no urgency exists, create some."
+    ],
+    sourceLabel: "Manual Entry",
+    status: "Not started",
+    completedSessions: 0,
+    sourceStartDates: [],
+    updatedAtIso: "2026-03-06T17:18:00.000Z",
+    notesMd: `## Focus
+Strip away fake slowness and use deliberate urgency to move ordinary tasks quickly.
+
+## Principle
+Do things fast.
+Most things don't actually take that long; procrastination is what makes them feel long.
+Slow is often fake.
+When no urgency exists, create some.
+
+## Practice
+- Time the task instead of dramatizing it.
+- Start before your mind inflates the effort.
+- Use short deadlines to create movement when the environment does not.
+- Treat speed as clarity plus commitment, not as panic.`
   }
 ];
 

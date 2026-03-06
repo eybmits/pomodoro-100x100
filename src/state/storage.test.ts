@@ -66,6 +66,7 @@ describe("storage", () => {
     const disproof = loaded.skills.find((skill) => skill.title === "If You Can't Disprove It");
     const opinions = loaded.skills.find((skill) => skill.title === "Have Opinions");
     const doing = loaded.skills.find((skill) => skill.title === "Doing Is Energizing");
+    const fast = loaded.skills.find((skill) => skill.title === "Do Things Fast");
 
     expect(initiative).toBeDefined();
     expect(initiative!.notesMd).toContain("Stop asking for approval and permission.");
@@ -104,6 +105,9 @@ describe("storage", () => {
     expect(doing).toBeDefined();
     expect(doing!.notesMd).toContain("Doing things is energizing.");
     expect(doing!.notesMd).toContain('You need less "rest" than you think.');
+    expect(fast).toBeDefined();
+    expect(fast!.notesMd).toContain("Do things fast.");
+    expect(fast!.notesMd).toContain("When no urgency exists, create some.");
   });
 
   it("merges imported notes into matching aliases without creating duplicates", () => {
