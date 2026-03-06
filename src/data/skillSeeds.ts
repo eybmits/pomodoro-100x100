@@ -5,6 +5,11 @@ import {
 } from "./importedSkills";
 
 export interface SkillSeed extends ImportedSkillSeed {
+  links?: Array<{
+    label: string;
+    targetKey?: string;
+    url?: string;
+  }>;
   notesMd?: string;
   sourceLabel?: string;
   updatedAtIso?: string;
@@ -65,6 +70,115 @@ Intelligence, efficiency, and great systems help, but they do not replace the wo
 - Use systems to support repetition, not to avoid it.
 - Judge progress by accumulated practice, not just insight.
 - Default to another focused block when in doubt.`
+  },
+  {
+    key: "beanenergizingpresence",
+    title: "Be an Energizing Presence",
+    aliases: ["Be an Energizing Presence"],
+    slots: [91],
+    sourceTitles: [
+      "Become the kind of person who, after a conversation, leaves others more energized, more ambitious, and more ready to act. Those people are rare. Be one of them - and when you find another, keep them close."
+    ],
+    sourceLabel: "Manual Entry",
+    status: "Not started",
+    completedSessions: 0,
+    sourceStartDates: [],
+    updatedAtIso: "2026-03-06T15:46:00.000Z",
+    links: [
+      {
+        label: "Make People Feel Like They Matter",
+        targetKey: "makepeoplefeelliketheymatter"
+      },
+      {
+        label: "Borrowed Belief",
+        targetKey: "borrowedbelief"
+      },
+      {
+        label: "Talk About Possibility",
+        targetKey: "talkaboutpossibility"
+      }
+    ],
+    notesMd: `## Focus
+Become the kind of person who leaves people more energized, more ambitious, and more ready to act after a conversation.
+
+## Principle
+Those people are rare.
+Be one of them, and when you find another, keep them close.
+
+## Practice
+- Show full attention.
+- Add energy without forcing it.
+- Leave people with momentum, not just analysis.
+- Notice who consistently expands your ambition and stay close to them.`
+  },
+  {
+    key: "makepeoplefeelliketheymatter",
+    title: "Make People Feel Like They Matter",
+    aliases: ["Make People Feel Like They Matter"],
+    slots: [92],
+    sourceTitles: [
+      "Most people are half-distracted, waiting for their turn to speak. Energizing people make you feel like you matter."
+    ],
+    sourceLabel: "Manual Entry",
+    status: "Not started",
+    completedSessions: 0,
+    sourceStartDates: [],
+    updatedAtIso: "2026-03-06T15:46:00.000Z",
+    notesMd: `## Focus
+Use attention as a form of respect.
+
+## Principle
+Most people are half-distracted, waiting for their turn to speak.
+Energizing people make you feel like you matter.
+
+## Practice
+- Listen long enough to understand what is actually at stake for the other person.
+- Respond to what they mean, not just to the last sentence.
+- Let your attention communicate that their ideas are worth taking seriously.`
+  },
+  {
+    key: "borrowedbelief",
+    title: "Borrowed Belief",
+    aliases: ["Borrowed Belief"],
+    slots: [93],
+    sourceTitles: ["Believe in people a little more than they believe in themselves."],
+    sourceLabel: "Manual Entry",
+    status: "Not started",
+    completedSessions: 0,
+    sourceStartDates: [],
+    updatedAtIso: "2026-03-06T15:46:00.000Z",
+    notesMd: `## Focus
+Lend people a larger self-concept than the one they are currently carrying.
+
+## Principle
+Believe in people a little more than they believe in themselves.
+
+## Practice
+- Reflect back their strengths with precision.
+- Expect more from them in a way that feels grounding, not performative.
+- Use belief to unlock action, not to flatter.`
+  },
+  {
+    key: "talkaboutpossibility",
+    title: "Talk About Possibility",
+    aliases: ["Talk About Possibility"],
+    slots: [94],
+    sourceTitles: ["Talk about possibility, not just problems."],
+    sourceLabel: "Manual Entry",
+    status: "Not started",
+    completedSessions: 0,
+    sourceStartDates: [],
+    updatedAtIso: "2026-03-06T15:46:00.000Z",
+    notesMd: `## Focus
+Shift conversations toward what can be built, changed, or attempted next.
+
+## Principle
+Talk about possibility, not just problems.
+
+## Practice
+- Name the real constraint, then move quickly to options.
+- Frame next steps in a way that creates agency.
+- Let people leave the conversation with a concrete opening for action.`
   }
 ];
 

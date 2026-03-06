@@ -58,6 +58,7 @@ describe("storage", () => {
       (skill) => skill.title === "Initiative Without Permission"
     );
     const hours = loaded.skills.find((skill) => skill.title === "Hours Still Matter");
+    const energizing = loaded.skills.find((skill) => skill.title === "Be an Energizing Presence");
 
     expect(initiative).toBeDefined();
     expect(initiative!.notesMd).toContain("Stop asking for approval and permission.");
@@ -65,6 +66,16 @@ describe("storage", () => {
     expect(hours).toBeDefined();
     expect(hours!.notesMd).toContain("The 10,000-hour rule is true.");
     expect(hours!.notesMd).toContain("they do not replace the work");
+    expect(energizing).toBeDefined();
+    expect(energizing!.notesMd).toContain("Those people are rare.");
+    expect(energizing!.links.map((link) => link.label)).toEqual(
+      expect.arrayContaining([
+        "Make People Feel Like They Matter",
+        "Borrowed Belief",
+        "Talk About Possibility"
+      ])
+    );
+    expect(energizing!.links.every((link) => link.url.startsWith("#/app/skill/"))).toBe(true);
   });
 
   it("merges imported notes into matching aliases without creating duplicates", () => {

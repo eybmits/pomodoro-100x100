@@ -114,6 +114,27 @@ function shouldRemoveDeprecatedImportedSkill(skill: Skill): boolean {
   return importedLikeNotes && skill.completedSessions === 0 && skill.links.length === 0;
 }
 
+function buildSeedLinks(seed: (typeof SKILL_SEEDS)[number], skillIdByKey: Map<string, string>): SkillLink[] {
+  return (seed.links ?? [])
+    .map((seedLink) => {
+      const label = seedLink.label.trim();
+      const resolvedUrl =
+        seedLink.url?.trim() ??
+        (seedLink.targetKey ? `#/app/skill/${skillIdByKey.get(seedLink.targetKey) ?? ""}` : "");
+
+      if (!label || !resolvedUrl || resolvedUrl.endsWith("/")) {
+        return null;
+      }
+
+      return {
+        id: createId(),
+        label,
+        url: resolvedUrl
+      };
+    })
+    .filter((link): link is SkillLink => link !== null);
+}
+
 function mergeImportedSkills(state: AppState): AppState {
   const nextSkills = state.skills.filter((skill) => !shouldRemoveDeprecatedImportedSkill(skill));
   const skillIndexByKey = new Map<string, number>();
@@ -178,6 +199,45 @@ function mergeImportedSkills(state: AppState): AppState {
 
     nextSkills.push(importedSkill);
     skillIndexByKey.set(seed.key, nextSkills.length - 1);
+    hasChanged = true;
+  }
+
+  const skillIdByKey = new Map<string, string>();
+  for (const skill of nextSkills) {
+    skillIdByKey.set(getImportedSkillKey(skill.title), skill.id);
+  }
+
+  for (const seed of SKILL_SEEDS) {
+    if (!seed.links?.length) {
+      continue;
+    }
+
+    const skillIndex = skillIndexByKey.get(seed.key);
+    if (skillIndex === undefined) {
+      continue;
+    }
+
+    const existingSkill = nextSkills[skillIndex]!;
+    const resolvedSeedLinks = buildSeedLinks(seed, skillIdByKey);
+    if (resolvedSeedLinks.length === 0) {
+      continue;
+    }
+
+    const existingLabels = new Set(
+      existingSkill.links.map((link) => link.label.trim().toLowerCase())
+    );
+    const missingLinks = resolvedSeedLinks.filter(
+      (link) => !existingLabels.has(link.label.trim().toLowerCase())
+    );
+
+    if (missingLinks.length === 0) {
+      continue;
+    }
+
+    nextSkills[skillIndex] = {
+      ...existingSkill,
+      links: [...existingSkill.links, ...missingLinks]
+    };
     hasChanged = true;
   }
 
