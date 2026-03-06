@@ -179,6 +179,34 @@ Talk about possibility, not just problems.
 - Name the real constraint, then move quickly to options.
 - Frame next steps in a way that creates agency.
 - Let people leave the conversation with a concrete opening for action.`
+  },
+  {
+    key: "aimatgreatness",
+    title: "Aim at Greatness",
+    aliases: ["Aim at Greatness"],
+    slots: [95],
+    sourceTitles: [
+      "Aim at greatness. Set your standard absurdly high. Mediocrity is the default. To do truly great work, you have to aim to stand with the greats."
+    ],
+    sourceLabel: "Manual Entry",
+    status: "Not started",
+    completedSessions: 0,
+    sourceStartDates: [],
+    updatedAtIso: "2026-03-06T16:59:00.000Z",
+    notesMd: `## Focus
+Set the target high enough that it pulls your work out of the default drift toward mediocrity.
+
+## Principle
+Aim at greatness.
+Set your standard absurdly high.
+Mediocrity is the default.
+To do truly great work, you have to aim to stand with the greats.
+
+## Practice
+- Raise the standard before you start.
+- Judge drafts against excellence, not against what is merely acceptable.
+- Use ambition as a corrective against your natural drift toward average work.
+- Ask what would make the result worthy of the greats, then build toward that.`
   }
 ];
 

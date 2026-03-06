@@ -59,6 +59,7 @@ describe("storage", () => {
     );
     const hours = loaded.skills.find((skill) => skill.title === "Hours Still Matter");
     const energizing = loaded.skills.find((skill) => skill.title === "Be an Energizing Presence");
+    const greatness = loaded.skills.find((skill) => skill.title === "Aim at Greatness");
 
     expect(initiative).toBeDefined();
     expect(initiative!.notesMd).toContain("Stop asking for approval and permission.");
@@ -76,6 +77,9 @@ describe("storage", () => {
       ])
     );
     expect(energizing!.links.every((link) => link.url.startsWith("#/app/skill/"))).toBe(true);
+    expect(greatness).toBeDefined();
+    expect(greatness!.notesMd).toContain("Aim at greatness.");
+    expect(greatness!.notesMd).toContain("Mediocrity is the default.");
   });
 
   it("merges imported notes into matching aliases without creating duplicates", () => {
