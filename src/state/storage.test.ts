@@ -64,6 +64,7 @@ describe("storage", () => {
       (skill) => skill.title === "Do Not Rationalize What Feels Wrong"
     );
     const disproof = loaded.skills.find((skill) => skill.title === "If You Can't Disprove It");
+    const opinions = loaded.skills.find((skill) => skill.title === "Have Opinions");
 
     expect(initiative).toBeDefined();
     expect(initiative!.notesMd).toContain("Stop asking for approval and permission.");
@@ -94,6 +95,11 @@ describe("storage", () => {
       "If you really can't disprove something, it has a chance of being right."
     );
     expect(disproof!.notesMd).toContain("Treat surviving scrutiny as a reason to investigate further");
+    expect(opinions).toBeDefined();
+    expect(opinions!.notesMd).toContain("Have opinions.");
+    expect(opinions!.notesMd).toContain(
+      "Take a position, expose it to the best criticism you can find, and improve it."
+    );
   });
 
   it("merges imported notes into matching aliases without creating duplicates", () => {

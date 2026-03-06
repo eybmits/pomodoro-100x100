@@ -257,6 +257,33 @@ If you really can't disprove something, it has a chance of being right.
 - Distinguish "I dislike it" from "I disproved it."
 - Leave room for uncomfortable possibilities that survive honest criticism.
 - Treat surviving scrutiny as a reason to investigate further, not to dismiss reflexively.`
+  },
+  {
+    key: "haveopinions",
+    title: "Have Opinions",
+    aliases: ["Have Opinions"],
+    slots: [98],
+    sourceTitles: [
+      "Have opinions. Don't drift through ideas passively. Take a position, expose it to the best criticism you can find, and improve it."
+    ],
+    sourceLabel: "Manual Entry",
+    status: "Not started",
+    completedSessions: 0,
+    sourceStartDates: [],
+    updatedAtIso: "2026-03-06T17:10:00.000Z",
+    notesMd: `## Focus
+Form views actively instead of drifting through ideas without commitment.
+
+## Principle
+Have opinions.
+Don't drift through ideas passively.
+Take a position, expose it to the best criticism you can find, and improve it.
+
+## Practice
+- State what you currently think in a sentence.
+- Seek out the strongest criticism, not the weakest.
+- Let challenge refine your position instead of dissolving your willingness to think clearly.
+- Aim for views that can survive contact with serious disagreement.`
   }
 ];
 
