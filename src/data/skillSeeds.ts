@@ -365,6 +365,29 @@ Never have zero-output days.
 - Touch it first before messages, noise, or logistics take over.
 - Make the minimum daily unit small enough that you never miss twice.
 - Judge the day partly by whether the primary focus moved at all.`
+  },
+  {
+    key: "benostalgicfornow",
+    title: "Be Nostalgic for Now",
+    aliases: ["Be Nostalgic for Now"],
+    slots: [102],
+    sourceTitles: ["Later, you'll be nostalgic for right now."],
+    sourceLabel: "Manual Entry",
+    status: "Not started",
+    completedSessions: 0,
+    sourceStartDates: [],
+    updatedAtIso: "2026-03-06T17:30:00.000Z",
+    notesMd: `## Focus
+Relate to the present with the awareness that it will one day become a missed season of your life.
+
+## Principle
+Later, you'll be nostalgic for right now.
+
+## Practice
+- Notice ordinary details as if they were already memory.
+- Treat the current chapter as something you may miss sooner than you expect.
+- Let future nostalgia sharpen gratitude and attention in the present.
+- Use that perspective to show up more fully before the moment passes.`
   }
 ];
 
