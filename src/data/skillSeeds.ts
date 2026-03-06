@@ -284,6 +284,33 @@ Take a position, expose it to the best criticism you can find, and improve it.
 - Seek out the strongest criticism, not the weakest.
 - Let challenge refine your position instead of dissolving your willingness to think clearly.
 - Aim for views that can survive contact with serious disagreement.`
+  },
+  {
+    key: "doingisenergizing",
+    title: "Doing Is Energizing",
+    aliases: ["Doing Is Energizing"],
+    slots: [99],
+    sourceTitles: [
+      "Doing things is energizing. Wasting time is depressing. You need less \"rest\" than you think."
+    ],
+    sourceLabel: "Manual Entry",
+    status: "Not started",
+    completedSessions: 0,
+    sourceStartDates: [],
+    updatedAtIso: "2026-03-06T17:14:00.000Z",
+    notesMd: `## Focus
+Notice that meaningful action tends to generate energy, while passive drift tends to drain it.
+
+## Principle
+Doing things is energizing.
+Wasting time is depressing.
+You need less "rest" than you think.
+
+## Practice
+- Distinguish real recovery from low-quality avoidance.
+- Start with one concrete action before negotiating with your mood.
+- Use movement and execution to create energy instead of waiting for energy first.
+- Treat purposeful effort as fuel, not just as expenditure.`
   }
 ];
 
